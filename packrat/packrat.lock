@@ -28,11 +28,14 @@ Source: CRAN
 Version: 0.12.7
 Hash: f0ba7322cfb66f1b563462faa9c2b2ab
 
+<<<<<<< HEAD
 Package: SnowballC
 Source: CRAN
 Version: 0.5.1
 Hash: 6f14c834eea7672f25b83d9ba35b85ca
 
+=======
+>>>>>>> d3233a09a37a82039682d3b6aa5d7ec2acf7dbe4
 Package: base64enc
 Source: CRAN
 Version: 0.1-3
