@@ -24,9 +24,8 @@ corpus <- Corpus(VectorSource(tweets),
                       readerControl = list(language = "spanish"))
 
 # remove URLs
-corpus <- tm_map(corpus,content_transformer(function(x) gsub("\bhttp.*\b","",x,ignore.case=TRUE, perl = TRUE)))
-corpus <- tm_map(corpus,content_transformer(function(x) gsub("\b@.*\b","",x,ignore.case=TRUE, perl = TRUE)))
-
+corpus <- tm_map(corpus,content_transformer(function(x) gsub("http\\S*","", x,ignore.case=TRUE)))
+corpus <- tm_map(corpus,content_transformer(function(x) gsub("@\\S*","", x ,ignore.case=TRUE)))
 
 # create document term matrix applying some transformations
 tdm <- TermDocumentMatrix(corpus,
