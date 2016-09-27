@@ -11,7 +11,8 @@ library(RColorBrewer)
 # esa parte.
 
 # get the twits
-mySearch <- searchTwitter("#semanai", n = 1000)
+mySearch <- searchTwitter("paz", n = 500)
+
 
 # Get rid of non-utf-8 characters
 rawTweets <- twListToDF(mySearch)$text
@@ -23,12 +24,14 @@ corpus <- Corpus(VectorSource(tweets),
                       readerControl = list(language = "spanish"))
 
 # remove URLs
-corpus <- tm_map(corpus,content_transformer(function(x) gsub("http.*",".",x,ignore.case=TRUE)))
+corpus <- tm_map(corpus,content_transformer(function(x) gsub("\bhttp.*\b","",x,ignore.case=TRUE, perl = TRUE)))
+corpus <- tm_map(corpus,content_transformer(function(x) gsub("\b@.*\b","",x,ignore.case=TRUE, perl = TRUE)))
+
 
 # create document term matrix applying some transformations
 tdm <- TermDocumentMatrix(corpus,
                          control = list(language = "spanish", removePunctuation = TRUE,
-                                        stopwords = c(stopwords("spanish")),
+                                        stopwords = stopwords("spanish"),
                                         removeNumbers = TRUE, tolower = TRUE))
 # define tdm as matrix
 m = as.matrix(tdm)
@@ -38,7 +41,7 @@ word_freqs = sort(rowSums(m), decreasing=TRUE)
 dm = data.frame(word=names(word_freqs), freq=word_freqs)
 
 # plot wordcloud
-wordcloud(dm$word, dm$freq, random.order=FALSE, colors=brewer.pal(8, "Dark2"))
+wordcloud(dm$word[2:500], dm$freq[2:300], random.order=FALSE, colors=brewer.pal(8, "Dark2"))
 
 # save the image in png format
 png("wordCloud.png", width=12, height=8, units="in", res=300)
