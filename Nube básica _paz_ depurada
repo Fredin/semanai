@@ -1,0 +1,27 @@
+library(twitteR)
+library(tm)
+library(wordcloud)
+
+api_key <- "tP684hb55g52M5kyksz4KjTpN"
+
+api_secret <- "AJdgghe2d9pfBaxvjdYYDvBhZ4LoJo2kXJ4I1DwCnDv8MilqdA"
+
+access_token <- "205500871-FKz80vPrOJICvTP6Cwq5Fp4nLFIdkBOe6QMUSyY4"
+
+access_token_secret <- "5sQMsPVWMpoCDEbL4nnlKkEZzm6w6PvSfJns7gsDdpNXd"
+
+setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+
+plebicol <- searchTwitter("paz", n = 300)
+
+plebicol_im <- sapply(plebicol, function(i) i$getText())
+plebicol_im <- sapply(plebicol_im,function(row) iconv(row, "latin1", "ASCII", sub=""))
+
+
+plebicolhim <- Corpus(VectorSource(plebicol_im))
+
+plebicol1 <- tm_map(plebicol1,content_transformer(function(x) gsub("http.*",".","@[a:z]*\b.","httpst", "www.*",x,ignore.case=TRUE)))
+plebicol1 <- tm_map(plebicolhim, removePunctuation)
+plebicol1 <- tm_map(plebicol1,removeWords, stopwords("spanish"))
+
+wordcloud(plebicol1, random.order=FALSE, colors=rainbow(15))
