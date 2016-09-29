@@ -1,6 +1,6 @@
-### Esto es en gran parte código de Gastón Sanchez. El código original y mucho más lo
-### pueden encontrar en https://sites.google.com/site/miningtwitter/ Un súper
-### sitio si apenas estan empezando a minar y visualizar texto con R.
+### Esto es en gran parte código de Gastón Sanchez. El código original y mucho
+### más lo pueden encontrar en https://sites.google.com/site/miningtwitter/
+### Un súper sitio si apenas estan empezando a minar y visualizar texto con R.
 
 library(twitteR)
 library(tm)
