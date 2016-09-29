@@ -1,0 +1,36 @@
+# Ejercicio de práctica visto en la semana 2 del curso R Programming en Coursera. 
+# El tutorial completo, que incluye el archivo con los datos, se encuentra ahí.
+
+# Selecciona el directorio de trabajo con setwd().
+# Confirma la ubicación del directorio con getwd().
+# Otra forma de establecer el directorio de trabajo en RStudio es a través del menú Tools > Global Options.
+
+# Descarga el archivo diet_data con los datos para trabajar y ubícalo en tu directorio de trabajo.
+# Obtén una lista de los archivos con list.files().
+list.files("diet_data")
+# Explora un archivo
+andy <- read.csv("diet_data/Andy.csv")
+head(andy)
+tail(andy)
+
+# Gracias a la exploración anterior se puede observar que hay cuatro columnas de datos: Patient.Name, Age, Weight y Day.
+# tail() permitió darse cuenta de que hay 30 renglones, pero hay otra forma de saber cuántos de ellos hay y
+# es a través de la función length().
+length(andy$Day)
+# Se puede experimentar con las distintas columnas; cada una de ellas muestra que hay 30 renglones.
+length(andy$Weight)
+# Otra forma de saber las dimensiones del objeto data.frame es usando la función dim().
+dim(andy)
+# De esta manera sabemos el número de renglones y de columnas.
+
+# Otras maneras de obtener información general de un nuevo archivo es usando las siguientes funciones:
+str(andy)
+summary(andy)
+names(andy)
+
+# Para obtener información específica dentro de un conjunto de datos, por ejemplo, el día 30,
+# se pueden hacer subsets de las siguientes maneras:
+andy[30, "Weight"]
+andy[which(andy$Day == 30), "Weight"]
+andy[which(andy[,"Day"] == 30), "Weight"]
+subset(andy$Weight, andy$Day==30)
